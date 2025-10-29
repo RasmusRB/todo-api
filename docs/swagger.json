@@ -18,7 +18,7 @@
         },
         "version": "1.0"
     },
-    "host": "localhost:8080",
+    "host": "gotut-api.germanywestcentral.azurecontainer.io:8080",
     "basePath": "/",
     "paths": {
         "/todos": {
@@ -89,6 +89,45 @@
             }
         },
         "/todos/{id}": {
+            "get": {
+                "description": "Get a todo item by ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "todos"
+                ],
+                "summary": "Get a single todo",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Todo ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/handlers.ToDo"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            },
             "put": {
                 "description": "Update an existing todo item by ID",
                 "consumes": [

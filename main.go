@@ -31,6 +31,7 @@ func main() {
 	router.Use(middleware.CorsMiddleware())
 
 	router.GET("/todos", handlers.GetTodos)
+	router.GET("/todos/:id", handlers.GetTodoByID)
 	router.POST("/todos", handlers.CreateTodo)
 	router.PUT("/todos/:id", handlers.UpdateTodo)
 	router.DELETE("/todos/:id", handlers.DeleteTodo)

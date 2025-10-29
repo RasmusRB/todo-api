@@ -92,6 +92,45 @@ const docTemplate = `{
             }
         },
         "/todos/{id}": {
+            "get": {
+                "description": "Get a todo item by ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "todos"
+                ],
+                "summary": "Get a single todo",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Todo ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/handlers.ToDo"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            },
             "put": {
                 "description": "Update an existing todo item by ID",
                 "consumes": [
@@ -187,7 +226,7 @@ const docTemplate = `{
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
 	Version:          "1.0",
-	Host:             "localhost:8080",
+	Host:             "gotut-api.germanywestcentral.azurecontainer.io:8080",
 	BasePath:         "/",
 	Schemes:          []string{"http"},
 	Title:            "Todo API",
