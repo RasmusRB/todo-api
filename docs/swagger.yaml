@@ -1,0 +1,121 @@
+basePath: /
+definitions:
+  handlers.ToDo:
+    properties:
+      detail:
+        type: string
+      done:
+        type: boolean
+      id:
+        type: string
+      title:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact:
+    email: support@swagger.io
+    name: API Support
+    url: http://www.swagger.io/support
+  description: This is a simple Todo API server.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: Todo API
+  version: "1.0"
+paths:
+  /todos:
+    get:
+      consumes:
+      - application/json
+      description: Get a list of all todo items
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/handlers.ToDo'
+            type: array
+      summary: Get all todos
+      tags:
+      - todos
+    post:
+      consumes:
+      - application/json
+      description: Create a new todo item from JSON body
+      parameters:
+      - description: Todo object
+        in: body
+        name: todo
+        required: true
+        schema:
+          $ref: '#/definitions/handlers.ToDo'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Todo ID
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Create a new todo
+      tags:
+      - todos
+  /todos/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete a todo item by ID
+      parameters:
+      - description: Todo ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: No Content
+          schema:
+            type: string
+      summary: Delete a todo
+      tags:
+      - todos
+    put:
+      consumes:
+      - application/json
+      description: Update an existing todo item by ID
+      parameters:
+      - description: Todo ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Updated Todo object
+        in: body
+        name: todo
+        required: true
+        schema:
+          $ref: '#/definitions/handlers.ToDo'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.ToDo'
+      summary: Update a todo
+      tags:
+      - todos
+schemes:
+- http
+swagger: "2.0"
