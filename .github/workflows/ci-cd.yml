@@ -71,8 +71,6 @@ jobs:
           tags: |
             ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.IMAGE_NAME }}:${{ steps.vars.outputs.short_sha }}
             ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.IMAGE_NAME }}:latest
-          cache-from: type=registry,ref=${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.IMAGE_NAME }}:buildcache
-          cache-to: type=registry,ref=${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.IMAGE_NAME }}:buildcache,mode=max
 
       - name: Image built successfully
         run: |
