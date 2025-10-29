@@ -28,6 +28,37 @@ func GetTodos(c *gin.Context) {
 	})
 }
 
+// @Summary Get a single todo
+// @Description Get a todo item by ID
+// @Tags todos
+// @Accept json
+// @Produce json
+// @Param id path string true "Todo ID"
+// @Success 200 {object} ToDo
+// @Failure 404 {object} map[string]string
+// @Router /todos/{id} [get]
+func GetTodoByID(c *gin.Context) {
+	id := c.Param("id")
+
+	// Sample data - in real app, this would query a database
+	todos := []ToDo{
+		{ID: "1", Title: "Buy groceries", Done: false, Detail: "Milk, Bread, Eggs"},
+		{ID: "2", Title: "Read book", Done: true, Detail: "The Go Programming Language"},
+		{ID: "3", Title: "Exercise", Done: false, Detail: "30 minutes of running"},
+	}
+
+	// Find todo by ID
+	for _, todo := range todos {
+		if todo.ID == id {
+			c.IndentedJSON(http.StatusOK, todo)
+			return
+		}
+	}
+
+	// Not found
+	c.JSON(http.StatusNotFound, gin.H{"error": "Todo not found"})
+}
+
 // @Summary Create a new todo
 // @Description Create a new todo item from JSON body
 // @Tags todos
